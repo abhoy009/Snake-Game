@@ -78,7 +78,7 @@ const GamePieces = ({ score, setScore, onGameOver, direction, setDirection }) =>
         (snakeHead.x - apple.x) ** 2 + (snakeHead.y - apple.y) ** 2
       );
 
-      if (distance < 10) { // 14 is the size of the snake and apple squares
+      if (distance < 14) { // 14 is the size of the snake and apple squares
         setScore(prevScore => prevScore + 1); // Increment score by 1
 
         setApple({
