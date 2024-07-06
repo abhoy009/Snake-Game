@@ -8,7 +8,7 @@ const GamePieces = ({ score, setScore, onGameOver, direction, setDirection }) =>
     { x: 100, y: 50 },
     { x: 95, y: 50 },
   ]);
-  const [snake_speed, setSnakeSpeed] = useState(8); // State to manage snake speed
+  const [snakeSpeed, setSnakeSpeed] = useState(8); // State to manage snake speed
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -40,16 +40,16 @@ const GamePieces = ({ score, setScore, onGameOver, direction, setDirection }) =>
 
           switch (direction) {
             case "UP":
-              snakeHead.y -= snake_speed;
+              snakeHead.y -= snakeSpeed;
               break;
             case "DOWN":
-              snakeHead.y += snake_speed;
+              snakeHead.y += snakeSpeed;
               break;
             case "LEFT":
-              snakeHead.x -= snake_speed;
+              snakeHead.x -= snakeSpeed;
               break;
             case "RIGHT":
-              snakeHead.x += snake_speed;
+              snakeHead.x += snakeSpeed;
               break;
             default:
               break;
@@ -86,9 +86,9 @@ const GamePieces = ({ score, setScore, onGameOver, direction, setDirection }) =>
           y: Math.floor((Math.random() * ((canvas.height - 10) / 14)) * 14)
         });
 
-        // Increase speed by 1 for every 5 apples eaten
+        // Increase speed by 1/2 for every 3 apples eaten
         if ((score + 1) % 3 === 0) {
-          setSnakeSpeed(prevSpeed => prevSpeed + 1/2);
+          setSnakeSpeed(prevSpeed => prevSpeed + 0.5);
         }
 
         newSnake.push({
@@ -137,13 +137,13 @@ const GamePieces = ({ score, setScore, onGameOver, direction, setDirection }) =>
       moveSnake();
       drawSnake();
       drawApple();
-    }, 500 / snake_speed); // Adjust interval based on snake_speed
+    }, 500 / snakeSpeed); // Adjust interval based on snake_speed
 
     return () => {
       clearInterval(interval);
       window.removeEventListener("keydown", handleKeyPress);
     };
-  }, [apple, snake, direction, onGameOver, setScore, score, snake_speed]);
+  }, [apple, snake, direction, onGameOver, setScore, score, snakeSpeed, setDirection]);
 
   return (
     <div>
