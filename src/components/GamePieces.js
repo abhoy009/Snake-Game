@@ -8,7 +8,7 @@ const GamePieces = ({ score, setScore, onGameOver, direction, setDirection }) =>
     { x: 100, y: 50 },
     { x: 95, y: 50 },
   ]);
-  const [snake_speed, setSnakeSpeed] = useState(14); // State to manage snake speed
+  const [snake_speed, setSnakeSpeed] = useState(8); // State to manage snake speed
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -78,7 +78,7 @@ const GamePieces = ({ score, setScore, onGameOver, direction, setDirection }) =>
         (snakeHead.x - apple.x) ** 2 + (snakeHead.y - apple.y) ** 2
       );
 
-      if (distance < 10) { // 14 is the size of the snake and apple squares
+      if (distance < 14) { // 14 is the size of the snake and apple squares
         setScore(prevScore => prevScore + 1); // Increment score by 1
 
         setApple({
@@ -87,7 +87,7 @@ const GamePieces = ({ score, setScore, onGameOver, direction, setDirection }) =>
         });
 
         // Increase speed by 1 for every 5 apples eaten
-        if ((score + 1) % 5 === 0) {
+        if ((score + 1) % 3 === 0) {
           setSnakeSpeed(prevSpeed => prevSpeed + 1/2);
         }
 
@@ -137,7 +137,7 @@ const GamePieces = ({ score, setScore, onGameOver, direction, setDirection }) =>
       moveSnake();
       drawSnake();
       drawApple();
-    }, 1000 / snake_speed); // Adjust interval based on snake_speed
+    }, 500 / snake_speed); // Adjust interval based on snake_speed
 
     return () => {
       clearInterval(interval);

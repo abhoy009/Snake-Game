@@ -63,6 +63,9 @@ const GameState = () => {
           setDirection={setDirection}
         />
       )}
+      <button className="reload-button" onClick={handleResetGame}>
+        Reload
+      </button>
     </div>
   );
 };
